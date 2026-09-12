@@ -1,0 +1,8 @@
+pandas
+sqlalchemy
+streamlit
+reportlab
+streamlit
+plotly
+bash
+
