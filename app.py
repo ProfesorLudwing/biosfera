@@ -6,16 +6,17 @@ st.set_page_config(page_title="De la Roca a la Vida", page_icon="🌍", layout="
 
 st.title("🌍 De la Roca a la Vida: Litosfera, Pedosfera y Biosfera")
 st.markdown("### CBTIS 303 | Ciencias Naturales, Experimentales y Tecnología III")
-st.write("Explora las capas que conectan la geología con la vida. Selecciona una pestaña para ver esquemas, datos clave y poner a prueba tus conocimientos.")
+st.write("Explora las capas que conectan la geología con la vida. Cada subpestaña contiene su propia imagen e información específica.")
 
 # --- RUTAS DE IMÁGENES ---
 IMAGENES = {
     "Litosfera_Esquema": "litosfera_esquema.png",
-    "Litosfera_Placas": "placas_tectonicas.jpg",
+    "Litosfera_Placas": "placas_tectonicas.png",
     "Litosfera_Tipos": "tipos_litosfera.png",
     "Pedosfera_Perfil": "pedosfera_perfil.png",
-    "Pedosfera_Edafogenesis": "edafogenesis.jpg",
+    "Pedosfera_Edafogenesis": "edafogenesis.png",
     "Biosfera_Esquema": "biosfera_esquema.png",
+    "Biosfera_Fotosintesis": "fotosintesis.jpg",
     "Biosfera_Quimiosintesis": "quimiosintesis.png"
 }
 
@@ -31,7 +32,7 @@ CUESTIONARIO = {
                 "Solo la corteza"
             ],
             "correcta": "Corteza + manto superior rígido",
-            "pista": "Revisa la definición exacta: no es solo la corteza."
+            "pista": "Revisa la definición en la subpestaña 'Esquema General'."
         },
         {
             "id": "lit2",
@@ -42,18 +43,18 @@ CUESTIONARIO = {
                 "No hay diferencia"
             ],
             "correcta": "La oceánica es más densa y delgada",
-            "pista": "Mira la composición y el grosor de cada una."
+            "pista": "Mira la subpestaña 'Tipos de Litosfera'."
         },
         {
             "id": "lit3",
-            "pregunta": "¿Por qué la Litosfera está fragmentada en placas?",
+            "pregunta": "¿Cuántas placas tectónicas principales fragmentan la Litosfera?",
             "opciones": [
-                "Por el movimiento de la Astenosfera",
-                "Por la temperatura del núcleo",
-                "Por la presión de la atmósfera"
+                "Alrededor de 15",
+                "Alrededor de 3",
+                "Alrededor de 100"
             ],
-            "correcta": "Por el movimiento de la Astenosfera",
-            "pista": "La capa sobre la que flota es plástica."
+            "correcta": "Alrededor de 15",
+            "pista": "Revisa la subpestaña 'Placas Tectónicas'."
         },
         {
             "id": "lit4",
@@ -88,7 +89,7 @@ CUESTIONARIO = {
                 "B, A, O, C"
             ],
             "correcta": "O, A, B, C",
-            "pista": "Revisa el esquema de horizontes."
+            "pista": "Revisa la subpestaña 'Perfil del Suelo'."
         },
         {
             "id": "ped3",
@@ -99,7 +100,7 @@ CUESTIONARIO = {
                 "Solo actividad volcánica"
             ],
             "correcta": "Meteorización y mezcla con materia orgánica",
-            "pista": "Necesita roca triturada y humus."
+            "pista": "Revisa la subpestaña 'Edafogénesis'."
         },
         {
             "id": "ped4",
@@ -123,7 +124,7 @@ CUESTIONARIO = {
                 "Solo las plantas"
             ],
             "correcta": "El conjunto global de todos los ecosistemas y seres vivos",
-            "pista": "Piensa en el alcance de la vida en el planeta."
+            "pista": "Revisa la subpestaña 'Esquema General'."
         },
         {
             "id": "bio2",
@@ -134,21 +135,10 @@ CUESTIONARIO = {
                 "La energía geotérmica"
             ],
             "correcta": "La fotosíntesis",
-            "pista": "Representa el 99.9% de la energía."
+            "pista": "Representa el 99.9% de la energía de la Biosfera."
         },
         {
             "id": "bio3",
-            "pregunta": "¿Cómo transforma la Biosfera a la Litosfera?",
-            "opciones": [
-                "Mediante el biodeterioro y la edafogénesis",
-                "Generando terremotos",
-                "Creando montañas"
-            ],
-            "correcta": "Mediante el biodeterioro y la edafogénesis",
-            "pista": "Piensa en cómo las raíces y líquenes rompen las rocas."
-        },
-        {
-            "id": "bio4",
             "pregunta": "¿Qué proceso permite que exista vida en el fondo oceánico sin luz solar?",
             "opciones": [
                 "Quimiosíntesis",
@@ -156,7 +146,18 @@ CUESTIONARIO = {
                 "Respiración anaeróbica"
             ],
             "correcta": "Quimiosíntesis",
-            "pista": "Recuerda el 0.1% de excepción."
+            "pista": "Recuerda la subpestaña 'Quimiosíntesis'."
+        },
+        {
+            "id": "bio4",
+            "pregunta": "¿Qué productos genera la fotosíntesis?",
+            "opciones": [
+                "Glucosa y oxígeno",
+                "Solo dióxido de carbono",
+                "Solo agua"
+            ],
+            "correcta": "Glucosa y oxígeno",
+            "pista": "Revisa la ecuación en la subpestaña 'Fotosíntesis'."
         }
     ]
 }
@@ -180,39 +181,77 @@ tab_litosfera, tab_pedosfera, tab_biosfera = st.tabs([
 # ============================================================
 with tab_litosfera:
     st.header("🪨 La Litosfera: La Capa Rígida")
-    
-    col1, col2 = st.columns([1.2, 1])
-    
-    with col1:
-        subtab_esquema, subtab_placas, subtab_tipos = st.tabs([
-            "📏 Esquema General",
-            "🗺️ Placas Tectónicas",
-            "⚖️ Tipos de Litosfera"
-        ])
-        with subtab_esquema:
+
+    sub1, sub2, sub3 = st.tabs([
+        "📏 Esquema General",
+        "🗺️ Placas Tectónicas",
+        "⚖️ Tipos de Litosfera"
+    ])
+
+    # --- Subpestaña 1: Esquema General ---
+    with sub1:
+        col1, col2 = st.columns([1.2, 1])
+        with col1:
             mostrar_imagen(IMAGENES["Litosfera_Esquema"], "Esquema de la Litosfera sobre la Astenosfera.")
-        with subtab_placas:
+        with col2:
+            st.success("### 📖 Definición de la Litosfera")
+            st.markdown("""
+            La **Litosfera** es la capa externa y rígida de la Tierra. 
+            Incluye **toda la corteza** (continental y oceánica) **+ la parte superior del manto**.
+            """)
+            st.info("### 📊 Datos Clave")
+            st.markdown("""
+            - **Grosor:** 50-70 km (oceánica) a 100-200 km (continental).
+            - **Límite inferior:** La **Astenosfera** (capa plástica sobre la que "flota").
+            - **Comportamiento:** Es rígida y quebradiza; se fractura en lugar de fluir.
+            - **Importancia:** Es el soporte físico de los continentes y el fondo oceánico.
+            """)
+
+    # --- Subpestaña 2: Placas Tectónicas ---
+    with sub2:
+        col1, col2 = st.columns([1.2, 1])
+        with col1:
             mostrar_imagen(IMAGENES["Litosfera_Placas"], "Mapa de placas tectónicas y sus límites.")
-        with subtab_tipos:
+        with col2:
+            st.success("### 🗺️ Las Placas Tectónicas")
+            st.markdown("""
+            La Litosfera **no es continua**: está fragmentada en unas **15 placas rígidas** 
+            que se mueven lentamente (unos pocos cm al año) sobre la Astenosfera.
+            """)
+            st.info("### 📊 Tipos de Límites entre Placas")
+            st.markdown("""
+            - **Convergente:** Las placas chocan → se forman montañas o volcanes (ej. Himalaya).
+            - **Divergente:** Las placas se separan → nace nueva corteza oceánica (ej. Dorsal Meso-atlántica).
+            - **Transformante:** Las placas se deslizan lateralmente → generan sismos (ej. Falla de San Andrés).
+            """)
+            st.warning("### 🌋 Fenómenos Asociados")
+            st.markdown("""
+            En los bordes de placas ocurren la mayoría de **terremotos, volcanes y tsunamis** del planeta.
+            """)
+
+    # --- Subpestaña 3: Tipos de Litosfera ---
+    with sub3:
+        col1, col2 = st.columns([1.2, 1])
+        with col1:
             mostrar_imagen(IMAGENES["Litosfera_Tipos"], "Comparación entre litosfera oceánica y continental.")
-    
-    with col2:
-        st.success("### 📖 Definición")
-        st.markdown("""
-        La **Litosfera** es la capa externa y rígida de la Tierra. 
-        Incluye **toda la corteza** (continental y oceánica) **+ la parte superior del manto**.
-        """)
-        
-        st.info("### 📊 Datos Clave")
-        st.markdown("""
-        - **Grosor:** 50-70 km (oceánica) a 100-200 km (continental).
-        - **Límite inferior:** La **Astenosfera** (capa plástica).
-        - **Composición:**
-            - Oceánica: **Basalto** (SIMA) → más densa.
-            - Continental: **Granito** (SIAL) → menos densa.
-        - **Fragmentación:** ~15 placas tectónicas que flotan sobre la Astenosfera.
-        """)
-    
+        with col2:
+            st.success("### ⚖️ Tipos de Litosfera")
+            st.markdown("Existen dos tipos según su composición y grosor:")
+            st.info("### 🌊 Litosfera Oceánica")
+            st.markdown("""
+            - **Composición:** Basalto (SIMA: Silicio + Magnesio).
+            - **Grosor:** 50-70 km (delgada).
+            - **Densidad:** Alta (se hunde bajo la continental).
+            - **Edad:** Joven (se renueva constantemente).
+            """)
+            st.warning("### 🏔️ Litosfera Continental")
+            st.markdown("""
+            - **Composición:** Granito (SIAL: Silicio + Aluminio).
+            - **Grosor:** 100-200 km (gruesa).
+            - **Densidad:** Baja (flota sobre la oceánica).
+            - **Edad:** Antigua (hasta miles de millones de años).
+            """)
+
     st.write("---")
     with st.expander("📝 Pon a prueba tus conocimientos sobre la Litosfera"):
         for q in CUESTIONARIO["litosfera"]:
@@ -228,40 +267,54 @@ with tab_litosfera:
 # ============================================================
 with tab_pedosfera:
     st.header("🌱 La Pedosfera: La Piel Viva")
-    
-    col1, col2 = st.columns([1.2, 1])
-    
-    with col1:
-        subtab_perfil, subtab_edafo = st.tabs([
-            "📏 Perfil del Suelo",
-            "🔄 Edafogénesis"
-        ])
-        with subtab_perfil:
+
+    sub1, sub2 = st.tabs([
+        "📏 Perfil del Suelo",
+        "🔄 Edafogénesis"
+    ])
+
+    # --- Subpestaña 1: Perfil del Suelo ---
+    with sub1:
+        col1, col2 = st.columns([1.2, 1])
+        with col1:
             mostrar_imagen(IMAGENES["Pedosfera_Perfil"], "Perfil del suelo con horizontes O, A, B y C.")
-        with subtab_edafo:
+        with col2:
+            st.success("### 📖 ¿Qué es la Pedosfera?")
+            st.markdown("""
+            Es la **capa más superficial de la Litosfera**, transformada por la acción 
+            de la vida y el clima. Es el **suelo fértil** donde crecen las plantas.
+            """)
+            st.info("### 📊 Horizontes del Suelo (de arriba a abajo)")
+            st.markdown("""
+            - **Horizonte O:** Hojarasca y materia orgánica fresca.
+            - **Horizonte A:** Mezcla de humus y minerales (el más fértil).
+            - **Horizonte B:** Acumulación de arcilla y óxidos.
+            - **Horizonte C:** Roca madre fragmentada.
+            """)
+            st.warning("### 📏 Grosor")
+            st.markdown("Apenas **0.5 a 2 metros**. ¡Es una película finísima comparada con los 6,371 km del radio terrestre!")
+
+    # --- Subpestaña 2: Edafogénesis ---
+    with sub2:
+        col1, col2 = st.columns([1.2, 1])
+        with col1:
             mostrar_imagen(IMAGENES["Pedosfera_Edafogenesis"], "Proceso de formación del suelo (edafogénesis).")
-    
-    with col2:
-        st.success("### 📖 Definición")
-        st.markdown("""
-        La **Pedosfera** es la capa más superficial de la Litosfera, 
-        transformada por la acción de la vida y el clima. Es el **suelo fértil**.
-        """)
-        
-        st.info("### 📊 Datos Clave")
-        st.markdown("""
-        - **Grosor:** 0.5 a 2 metros (¡una película finísima!).
-        - **Formación (Edafogénesis):**
-            1. **Meteorización** de la roca madre.
-            2. **Mezcla** con materia orgánica (humus).
-        - **Horizontes del suelo:**
-            - **O:** Hojarasca y materia orgánica fresca.
-            - **A:** Humus + minerales (suelo fértil).
-            - **B:** Acumulación de arcilla y óxidos.
-            - **C:** Roca madre fragmentada.
-        - **Importancia:** Almacena nutrientes y agua; hábitat del 25% de la biodiversidad.
-        """)
-    
+        with col2:
+            st.success("### 🔄 La Edafogénesis")
+            st.markdown("""
+            Es el **proceso de formación del suelo** a partir de la roca madre, 
+            gracias a la acción del clima, el agua y los seres vivos.
+            """)
+            st.info("### 📊 Pasos del Proceso")
+            st.markdown("""
+            1. **Meteorización:** La roca madre se rompe (física, química y biológica).
+            2. **Biodeterioro:** Líquenes y raíces aceleran la fragmentación.
+            3. **Mezcla con humus:** La materia orgánica muerta se descompone.
+            4. **Formación de horizontes:** Se estratifican las capas O, A, B, C.
+            """)
+            st.warning("### 🌱 Importancia")
+            st.markdown("Sin edafogénesis no habría suelos fértiles, y sin suelos no habría agricultura ni ecosistemas terrestres.")
+
     st.write("---")
     with st.expander("📝 Pon a prueba tus conocimientos sobre la Pedosfera"):
         for q in CUESTIONARIO["pedosfera"]:
@@ -277,37 +330,95 @@ with tab_pedosfera:
 # ============================================================
 with tab_biosfera:
     st.header("🧬 La Biosfera: La Vida que Conecta")
-    
-    col1, col2 = st.columns([1.2, 1])
-    
-    with col1:
-        subtab_esquema, subtab_quimio = st.tabs([
-            "🌍 Esquema General",
-            "⚗️ Quimiosíntesis"
-        ])
-        with subtab_esquema:
+
+    sub1, sub2, sub3 = st.tabs([
+        "🌍 Esquema General",
+        "🌿 Fotosíntesis",
+        "⚗️ Quimiosíntesis"
+    ])
+
+    # --- Subpestaña 1: Esquema General ---
+    with sub1:
+        col1, col2 = st.columns([1.2, 1])
+        with col1:
             mostrar_imagen(IMAGENES["Biosfera_Esquema"], "La Biosfera como una película delgada de vida.")
-        with subtab_quimio:
+        with col2:
+            st.success("### 📖 Definición de la Biosfera")
+            st.markdown("""
+            La **Biosfera** es el conjunto global de todos los ecosistemas y seres vivos. 
+            Es una capa delgada (~20 km) que impregna la Litosfera, Hidrosfera y Atmósfera.
+            """)
+            st.info("### 📊 Datos Clave")
+            st.markdown("""
+            - **Grosor:** Desde el fondo oceánico (-11 km) hasta la atmósfera baja (+12 km).
+            - **Función:** Transforma la Litosfera mediante **biodeterioro** y **edafogénesis**.
+            - **Motores energéticos:**
+                - **Fotosíntesis** (99.9%).
+                - **Quimiosíntesis** (0.1%).
+            """)
+            st.warning("### 🔗 Relación con las Otras Capas")
+            st.markdown("""
+            - Con la **Litosfera:** Obtiene nutrientes minerales y la transforma.
+            - Con la **Hidrosfera:** Regula el ciclo del agua.
+            - Con la **Atmósfera:** Intercambia CO₂ y O₂.
+            """)
+
+    # --- Subpestaña 2: Fotosíntesis ---
+    with sub2:
+        col1, col2 = st.columns([1.2, 1])
+        with col1:
+            mostrar_imagen(IMAGENES["Biosfera_Fotosintesis"], "Esquema del proceso de fotosíntesis.")
+        with col2:
+            st.success("### 🌿 La Fotosíntesis")
+            st.markdown("""
+            Proceso por el cual **plantas, algas y cianobacterias** capturan la energía 
+            solar y la convierten en energía química (glucosa).
+            """)
+            st.info("### 📊 Ecuación General")
+            st.markdown("""
+            **6 CO₂ + 6 H₂O + Luz solar → C₆H₁₂O₆ + 6 O₂**
+            
+            - **Reactivos:** Dióxido de carbono (CO₂) + Agua (H₂O).
+            - **Productos:** Glucosa (C₆H₁₂O₆) + Oxígeno (O₂).
+            """)
+            st.warning("### 🌍 Importancia Global")
+            st.markdown("""
+            - **Libera el oxígeno** que respiramos.
+            - **Captura el CO₂** atmosférico (regula el clima).
+            - **Es la base de la cadena trófica** en casi todos los ecosistemas.
+            - Representa el **99.9%** de la energía que sostiene a la Biosfera.
+            """)
+
+    # --- Subpestaña 3: Quimiosíntesis ---
+    with sub3:
+        col1, col2 = st.columns([1.2, 1])
+        with col1:
             mostrar_imagen(IMAGENES["Biosfera_Quimiosintesis"], "Comparación entre fotosíntesis y quimiosíntesis.")
-    
-    with col2:
-        st.success("### 📖 Definición")
-        st.markdown("""
-        La **Biosfera** es el conjunto global de todos los ecosistemas y seres vivos. 
-        Es una capa delgada (~20 km) que impregna la Litosfera, Hidrosfera y Atmósfera.
-        """)
-        
-        st.info("### 📊 Datos Clave")
-        st.markdown("""
-        - **Motores energéticos:**
-            - **Fotosíntesis (99.9%):** Energía solar.
-            - **Quimiosíntesis (0.1%):** Energía química de la Litosfera.
-        - **Transforma la Litosfera:**
-            - **Biodeterioro:** Rompe rocas (raíces, líquenes).
-            - **Edafogénesis:** Crea suelo fértil.
-        - **Relación con la Pedosfera:** La Biosfera es la que "fabrica" el humus.
-        """)
-    
+        with col2:
+            st.success("### ⚗️ La Quimiosíntesis")
+            st.markdown("""
+            Proceso por el cual **bacterias y arqueas** obtienen energía oxidando 
+            compuestos inorgánicos que vienen directamente de la Litosfera.
+            """)
+            st.info("### 📊 ¿Dónde Ocurre?")
+            st.markdown("""
+            - **Fondo oceánico:** Fuentes hidrotermales (fumarolas negras).
+            - **Subsuelo terrestre:** Hasta 10 km de profundidad en rocas.
+            - **Suelo:** Nitrificación (bacterias *Nitrosomonas* y *Nitrobacter*).
+            """)
+            st.warning("### ⚡ ¿Qué Produce?")
+            st.markdown("""
+            - **Materia orgánica nueva** sin necesidad de luz solar.
+            - **Compuestos oxidados** (sulfatos, nitratos, óxidos de hierro).
+            - **Nuevos minerales** (precipitación de óxidos).
+            - **Ecosistemas completos** (gusanos tubícolas gigantes, almejas).
+            """)
+            st.error("### 🔬 Dato Clave")
+            st.markdown("""
+            En el suelo, la quimiosíntesis (nitrificación) produce los **nitratos** 
+            que las plantas absorben. ¡Sin ella, la agricultura no existiría!
+            """)
+
     st.write("---")
     with st.expander("📝 Pon a prueba tus conocimientos sobre la Biosfera"):
         for q in CUESTIONARIO["biosfera"]:
