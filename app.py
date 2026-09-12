@@ -11,10 +11,10 @@ st.write("Explora las capas que conectan la geología con la vida. Cada subpesta
 # --- RUTAS DE IMÁGENES ---
 IMAGENES = {
     "Litosfera_Esquema": "litosfera_esquema.png",
-    "Litosfera_Placas": "placas_tectonicas.png",
+    "Litosfera_Placas": "placas_tectonicas.jpg",
     "Litosfera_Tipos": "tipos_litosfera.png",
     "Pedosfera_Perfil": "pedosfera_perfil.png",
-    "Pedosfera_Edafogenesis": "edafogenesis.png",
+    "Pedosfera_Edafogenesis": "edafogenesis.jpg",
     "Biosfera_Esquema": "biosfera_esquema.png",
     "Biosfera_Fotosintesis": "fotosintesis.jpg",
     "Biosfera_Quimiosintesis": "quimiosintesis.png"
